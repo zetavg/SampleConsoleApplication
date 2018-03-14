@@ -21,7 +21,7 @@
     <ClInclude Include="targetver.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="Greeter.h">
+    <ClInclude Include="*.h" Exclude="stdafx.h;targetver.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>
@@ -29,10 +29,7 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>來源檔案</Filter>
-    </ClCompile>
-    <ClCompile Include="Greeter.cpp">
+    <ClCompile Include="*.cpp" Exclude="stdafx.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>
