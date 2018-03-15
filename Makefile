@@ -7,13 +7,16 @@
 
 CXX = g++
 
+CPPFLAGS += -isystem $(GTEST_DIR)/include
+CXXFLAGS += -g -Wall -Wextra -pthread -std=c++0x
+
 # Location of the source code.
 SOURCE_DIR = ./src
 SOURCE = $(wildcard $(SOURCE_DIR)/*.cpp) $(wildcard $(SOURCE_DIR)/**/*.cpp)
 
 # Makes the main executable.
 bin/main: $(SOURCE:%.cpp=%.o)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
 
 # Run all test suites.
 test: bin/bundled-test
@@ -33,7 +36,7 @@ clean:
 	  -name '*.gcov' \
 	\) -exec rm {} \; \
 	&& \
-	rm -f \
+	rm -rf \
 	  bin/* \
 	  cov.info \
 	  coverage
@@ -51,10 +54,6 @@ GTEST_DIR = ./googletest/googletest
 # definition.
 GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
                 $(GTEST_DIR)/include/gtest/internal/*.h
-
-# Set Google Test's header directory as a system directory, such that
-# the compiler doesn't generate warnings in Google Test headers.
-CPPFLAGS += -isystem $(GTEST_DIR)/include
 
 # Flags to compile and link code instrumented for coverage analysis.
 COVFLAGS = -fprofile-arcs -ftest-coverage
@@ -92,7 +91,7 @@ gtest_main.a: gtest-all.o gtest_main.o
 
 # Builds bundled test.
 bin/bundled-test: $(TESTS:%.cpp=%.o) $(patsubst %.cpp, %.test.o, $(filter-out ./src/main.cpp, $(SOURCE))) gtest_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(COVFLAGS) -lpthread $^ -o $@
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(COVFLAGS) $^ -o $@
 
 gcov:
 	gcov -gcda=gtest_main.gcda -gcno=gtest_main.gcno googletest/googletest/src/gtest_main.cc
