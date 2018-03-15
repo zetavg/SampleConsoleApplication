@@ -1,10 +1,8 @@
-// ConsoleApplication.cpp: 定義主控台應用程式的進入點。
-//
-
 #include <iostream>
 #include <string>
 
 #include "Greeter.h"
+#include "sample/say_goodbye.h"
 
 
 int main()
@@ -14,6 +12,7 @@ int main()
 	std::string name;
 	std::cout << "Please enter your name: ";
 	std::cin >> name;
-	std::cout << greeter.greet(name);
+	std::cout << greeter.greet(name) << std::endl;
+	sample::say_goodbye();
     return 0;
 }

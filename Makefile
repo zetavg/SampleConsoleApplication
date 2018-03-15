@@ -1,9 +1,9 @@
 CXX = g++
-LDLIBS = -lstdc++
 
-SRC = $(filter-out stdafx.cpp, $(wildcard *.cpp))
+SRC = $(wildcard src/*.cpp) $(wildcard src/**/*.cpp)
 
-main: $(SRC:%.cpp=%.o)
+bin/main: $(SRC:%.cpp=%.o)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
 
 clean:
-	rm -rf main *.o *.d
+	find . -name '*.o' -exec rm {} \; && rm bin/main

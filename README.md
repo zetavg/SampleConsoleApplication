@@ -27,7 +27,7 @@ $ make
 Then run the built executable:
 
 ```bash
-$ ./main
+$ bin/main
 ```
 
 ### On Windows
