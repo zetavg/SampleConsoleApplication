@@ -11,6 +11,7 @@ This repo contains submodules, please add Add the `--recursive` flag while cloni
 
 - `make`
 - `g++`
+- `lcov` (if you want to generate coverage reports)
 
 ### Windows 10
 
@@ -33,11 +34,13 @@ Then run the built executable:
 $ bin/main
 ```
 
-#### Run The Tests
+#### Run the Tests
 
 ```bash
 $ make test
 ```
+
+To view the test coverage report, run `make coverage` then open `coverage/index.html`.
 
 ### On Windows
 
